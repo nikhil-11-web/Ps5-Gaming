@@ -7,6 +7,7 @@ import Navbar from './Navbar'; // Import the new Navbar
 import Features from './Features'; // Import the Features component
 import AboutSection from './AboutSection';
 import SpiderManSection from './SpidermanSection';
+import KeyFeatures from './KeyFeatures';
 
 // --- Icons ---
 const PlusIcon = () => (
@@ -357,6 +358,7 @@ const SpiderManPage = () => {
       <Features/>
       <AboutSection/>
       <SpiderManSection/>
+      <KeyFeatures/>
     </div>
   );
 };
