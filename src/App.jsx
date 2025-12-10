@@ -8,6 +8,7 @@ import Features from './Features'; // Import the Features component
 import AboutSection from './AboutSection';
 import SpiderManSection from './SpidermanSection';
 import KeyFeatures from './KeyFeatures';
+import ProductShowcase from './ProductShowcase';
 
 // --- Icons ---
 const PlusIcon = () => (
@@ -359,6 +360,7 @@ const SpiderManPage = () => {
       <AboutSection/>
       <SpiderManSection/>
       <KeyFeatures/>
+      <ProductShowcase/>
     </div>
   );
 };
