@@ -10,7 +10,9 @@ import SpiderManSection from './SpidermanSection';
 import KeyFeatures from './KeyFeatures';
 import ProductShowcase from './ProductShowcase';
 import PS5Features from './PS5Features';
-import HeroSection from './HeroSection'; // Import the HeroSection component
+import HeroSection from './HeroSection'; 
+import GameFranchise from './GameFranchise'; // Import GameFranchises component
+
 
 // --- Icons ---
 const PlusIcon = () => (
@@ -365,6 +367,7 @@ const SpiderManPage = () => {
       <ProductShowcase/>
       <PS5Features/>
       <HeroSection/>
+      <GameFranchise />
     </div>
   );
 };
