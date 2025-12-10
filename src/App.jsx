@@ -9,6 +9,7 @@ import AboutSection from './AboutSection';
 import SpiderManSection from './SpidermanSection';
 import KeyFeatures from './KeyFeatures';
 import ProductShowcase from './ProductShowcase';
+import PS5Features from './PS5Features';
 
 // --- Icons ---
 const PlusIcon = () => (
@@ -361,6 +362,7 @@ const SpiderManPage = () => {
       <SpiderManSection/>
       <KeyFeatures/>
       <ProductShowcase/>
+      <PS5Features/>
     </div>
   );
 };
