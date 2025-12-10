@@ -13,6 +13,8 @@ import PS5Features from './PS5Features';
 import HeroSection from './HeroSection'; 
 import GameFranchise from './GameFranchise'; 
 import DiscoverMoreGames from './DiscoverMoreGames'
+import AccessablityFeatures from './AccessablityFeatures'
+import GameDetails from './GameDetails';
 
 
 // --- Icons ---
@@ -370,6 +372,8 @@ const SpiderManPage = () => {
       <HeroSection/>
       <GameFranchise />
       <DiscoverMoreGames />
+      <AccessablityFeatures/>
+      <GameDetails/>
     </div>
   );
 };

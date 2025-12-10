@@ -12,7 +12,7 @@ const products = [
     platform: "PS5",
     originalPrice: "Rs 3,999",
     // REPLACE with your local image: import img1 from './assets/spiderman-ps5.jpg'
-    image: "https://placehold.co/800x450/8a0303/ffffff?text=Spider-Man+Remastered",
+    image: "public/image/SpiderMan-img.webp",
     features: [],
   },
   {
@@ -21,7 +21,7 @@ const products = [
     platform: "PS4",
     originalPrice: "Rs 2,999",
     // REPLACE with your local image: import img2 from './assets/spiderman-ps4.jpg'
-    image: "https://placehold.co/800x450/8a0303/ffffff?text=GOTY+Edition",
+    image: "public/image/SpiderMan-img.webp",
     features: [
       "Marvel's Spider-Man",
       "The Heist",
