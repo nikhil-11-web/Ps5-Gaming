@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import Lenis from 'lenis'; // Import Lenis for smooth scroll
 import Navbar from './Navbar'; // Import the new Navbar
 import Features from './Features'; // Import the Features component
+import AboutSection from './AboutSection';
+import SpiderManSection from './SpidermanSection';
 
 // --- Icons ---
 const PlusIcon = () => (
@@ -353,6 +355,8 @@ const SpiderManPage = () => {
       </main>
 
       <Features/>
+      <AboutSection/>
+      <SpiderManSection/>
     </div>
   );
 };
