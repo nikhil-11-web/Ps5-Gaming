@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Facebook, Twitter, Instagram, Youtube, Globe } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Globe, Heart } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,26 +23,26 @@ const Footer = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 90%", // Starts slightly earlier for better UX
+          start: "top 85%", // Trigger slightly earlier
         }
       });
 
       // 1. Breadcrumbs Fade In
       tl.from(topRef.current, {
-        y: 20,
+        y: 30,
         opacity: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: "power2.out"
       });
 
       // 2. Columns "Waterfall" Effect
       tl.from(columnsRef.current, {
-        y: 30,
+        y: 40,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.08, // Tighter stagger for a snappier feel
-        ease: "power3.out", // Smoother easing
-      }, "-=0.3");
+        stagger: 0.1, 
+        ease: "power3.out",
+      }, "-=0.4");
 
       // 3. Bottom Legal Section Fade Up
       tl.from(bottomRef.current, {
@@ -50,7 +50,7 @@ const Footer = () => {
         y: 20,
         duration: 1,
         ease: "power2.out"
-      }, "-=0.5");
+      }, "-=0.6");
 
     }, footerRef);
 
@@ -60,30 +60,35 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef} 
-      className="bg-[#00439c] text-white w-full font-sans pt-16 pb-20 overflow-hidden relative"
+      // FIX: Inline style for background image to ensure it loads correctly
+      style={{ backgroundImage: "url('/image/bg-image.webp')" }}
+      className="relative text-white w-full font-sans pt-16 pb-12 overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
     >
-      <div className="container mx-auto px-6 lg:px-12">
+      {/* --- Overlay: Makes text readable on top of image --- */}
+      <div className="absolute inset-0  z-0"></div>
+
+      <div className="relative z-10 container mx-auto px-6 lg:px-12">
         
         {/* --- TOP: LOGO & BREADCRUMBS --- */}
-        <div ref={topRef} className="mb-14">
-          <div className="flex items-center gap-2 mb-6 group cursor-pointer">
-             {/* Official PlayStation Logo SVG */}
-             <img className="w-16 h-16 fill-white transition-transform rounded-full duration-500 group-hover:scale-105" src="public/image/footer-logo-1.webp" alt="PlayStation Logo" />
-             <span className="text-3xl font-light tracking-wide pt-1">PlayStation</span>
+        <div ref={topRef} className="mb-14 border-b border-white/10 pb-10">
+          <div className="flex items-center gap-3 mb-6 group cursor-pointer w-fit">
+             {/* Logo Path Fixed: Removed 'public' */}
+             <img className="w-14 h-14 object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" src="/image/footer-logo-1.webp" alt="PlayStation Logo" />
+             <span className="text-3xl font-light tracking-widest pt-1 uppercase">PlayStation</span>
           </div>
 
-          <div className="text-xs md:text-sm text-[#8faecf] flex flex-wrap gap-2 items-center font-medium">
-            <a href="#" className="hover:text-white transition-colors duration-200">Home</a>
-            <span className="opacity-50">»</span>
-            <a href="#" className="hover:text-white transition-colors duration-200">Games</a>
-            <span className="opacity-50">»</span>
-            <span className="text-white opacity-90">Marvel's Spider-Man Remastered - PS5 Games | PlayStation</span>
+          <div className="text-xs md:text-sm text-blue-200/80 flex flex-wrap gap-2 items-center font-medium">
+            <a href="#" className="hover:text-white hover:underline transition-all duration-200">Home</a>
+            <span className="opacity-50 text-[10px]">▶</span>
+            <a href="#" className="hover:text-white hover:underline transition-all duration-200">Games</a>
+            <span className="opacity-50 text-[10px]">▶</span>
+            <span className="text-white opacity-90">Marvel's Spider-Man Remastered</span>
           </div>
         </div>
 
         {/* --- MAIN GRID LINKS --- */}
         {/* Responsive: 2 cols on mobile -> 3 on tablet -> 6 on desktop */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12 mb-16 border-b border-white/20 pb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-12 mb-16">
           
           <FooterColumn 
             addToRefs={addToRefs}
@@ -112,44 +117,56 @@ const Footer = () => {
           <FooterColumn 
             addToRefs={addToRefs}
             title="Resources" 
-            links={["Terms of service", "PS Store cancellation policy", "Age ratings", "Health warning", "Developers", "Glossary", "Official licensing programme"]} 
+            links={["Terms of service", "PS Store cancellation policy", "Age ratings", "Health warning", "Developers"]} 
           />
 
           {/* Socials Column */}
-          <div ref={addToRefs} className="space-y-6">
-            <h3 className="font-bold text-lg tracking-wide">Connect</h3>
-            <div className="flex gap-5">
+          <div ref={addToRefs} className="space-y-6 col-span-2 md:col-span-1 lg:col-span-1">
+            <h3 className="font-bold text-lg tracking-wide text-blue-400">Connect</h3>
+            <div className="flex gap-4">
               <SocialIcon Icon={Facebook} />
               <SocialIcon Icon={Twitter} />
               <SocialIcon Icon={Instagram} />
               <SocialIcon Icon={Youtube} />
             </div>
-            <ul className="space-y-3 text-sm text-[#dcebf9] font-medium">
-              <li><FooterLink text="iOS app" /></li>
-              <li><FooterLink text="Android APP" /></li>
-            </ul>
+            <div className="pt-4 space-y-3">
+              <button className="flex items-center gap-2 bg-white/10 hover:bg-blue-600 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 w-full justify-center">
+                 Download App
+              </button>
+            </div>
           </div>
 
         </div>
 
         {/* --- BOTTOM: LEGAL --- */}
-        <div ref={bottomRef} className="flex flex-col md:flex-row items-start gap-8">
+        <div ref={bottomRef} className="pt-10 border-t border-white/10 flex flex-col md:flex-row items-start gap-8 opacity-80">
           
           {/* SIE LOGO Area */}
           <div className="flex-shrink-0 group">
-             <Globe className="w-12 h-12 text-[#f5d51e] mb-2 md:hidden" /> {/* Fallback/Mobile Icon */}
-             
-             {/* This creates the yellow diamond logo with CSS to ensure it always works */}
-             <div className="w-14 h-14 bg-gradient-to-br from-[#f5d51e] to-[#e6a324] rotate-45 transform origin-center translate-y-2 translate-x-2 shadow-lg group-hover:rotate-180 transition-transform duration-700 ease-in-out"></div>
+             {/* The CSS Diamond Logo (Sony Style) */}
+             <div className="relative w-12 h-12 flex items-center justify-center">
+                <div className="w-8 h-8 bg-[#f5d51e] rotate-45 transform shadow-[0_0_15px_#f5d51e] group-hover:rotate-180 transition-transform duration-700 ease-in-out"></div>
+                <Globe className="absolute w-5 h-5 text-black z-10" />
+             </div>
           </div>
 
-          <div className="space-y-3 max-w-5xl">
-            <h4 className="text-xl font-light tracking-wide">Sony Interactive Entertainment</h4>
-            <p className="text-[11px] md:text-xs text-[#dcebf9] leading-relaxed opacity-80">
+          <div className="space-y-4 max-w-4xl">
+            <h4 className="text-lg font-light tracking-wide text-white">Sony Interactive Entertainment</h4>
+            <p className="text-[11px] md:text-xs text-gray-400 leading-relaxed">
               © 2026 Sony Interactive Entertainment Europe Limited (SIEE)<br />
               All content, games titles, trade names and/or trade dress, trademarks, artwork and associated imagery are trademarks and/or copyright material of their respective owners. All rights reserved. 
-              <a href="#" className="underline ml-1 hover:text-white transition-colors">More info</a>
+              <a href="#" className="underline ml-1 text-blue-400 hover:text-white transition-colors">More info</a>
             </p>
+            
+            <div className="flex flex-wrap gap-4 text-[11px] text-gray-500 pt-2">
+                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                <span>|</span>
+                <a href="#" className="hover:text-white transition-colors">Cookies</a>
+                <span>|</span>
+                <a href="#" className="hover:text-white transition-colors">Website Terms</a>
+                <span>|</span>
+                <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+            </div>
           </div>
           
         </div>
@@ -159,36 +176,29 @@ const Footer = () => {
   );
 };
 
-// --- HELPER COMPONENTS (For cleaner code & consistent animations) ---
+// --- HELPER COMPONENTS ---
 
 const FooterColumn = ({ title, links, addToRefs }) => (
   <div ref={addToRefs} className="space-y-5">
-    <h3 className="font-bold text-lg tracking-wide">{title}</h3>
-    <ul className="space-y-3 text-sm text-[#dcebf9] font-medium">
+    <h3 className="font-bold text-lg tracking-wide text-blue-400">{title}</h3>
+    <ul className="space-y-2.5 text-sm text-gray-400 font-medium">
       {links.map((link, i) => (
         <li key={i}>
-          <FooterLink text={link} />
+          <a href="#" className="block hover:text-white hover:translate-x-1 transition-all duration-300 ease-out">
+            {link}
+          </a>
         </li>
       ))}
     </ul>
   </div>
 );
 
-const FooterLink = ({ text }) => (
-  <a 
-    href="#" 
-    className="block hover:text-white hover:translate-x-1 transition-all duration-300 ease-out"
-  >
-    {text}
-  </a>
-);
-
 const SocialIcon = ({ Icon }) => (
   <a 
     href="#" 
-    className="bg-transparent p-1 rounded-full hover:bg-white/10 hover:scale-110 transition-all duration-300"
+    className="bg-white/5 p-2 rounded-full hover:bg-blue-600 hover:text-white hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(37,99,235,0.5)] transition-all duration-300"
   >
-    <Icon size={24} strokeWidth={1.5} />
+    <Icon size={20} strokeWidth={1.5} />
   </a>
 );
 
