@@ -1,0 +1,195 @@
+import React, { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Facebook, Twitter, Instagram, Youtube, Globe } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Footer = () => {
+  const footerRef = useRef(null);
+  const topRef = useRef(null);
+  const columnsRef = useRef([]);
+  const bottomRef = useRef(null);
+
+  // Helper to add refs to the array
+  const addToRefs = (el) => {
+    if (el && !columnsRef.current.includes(el)) {
+      columnsRef.current.push(el);
+    }
+  };
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 90%", // Starts slightly earlier for better UX
+        }
+      });
+
+      // 1. Breadcrumbs Fade In
+      tl.from(topRef.current, {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+
+      // 2. Columns "Waterfall" Effect
+      tl.from(columnsRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.08, // Tighter stagger for a snappier feel
+        ease: "power3.out", // Smoother easing
+      }, "-=0.3");
+
+      // 3. Bottom Legal Section Fade Up
+      tl.from(bottomRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        ease: "power2.out"
+      }, "-=0.5");
+
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <footer 
+      ref={footerRef} 
+      className="bg-[#00439c] text-white w-full font-sans pt-16 pb-20 overflow-hidden relative"
+    >
+      <div className="container mx-auto px-6 lg:px-12">
+        
+        {/* --- TOP: LOGO & BREADCRUMBS --- */}
+        <div ref={topRef} className="mb-14">
+          <div className="flex items-center gap-2 mb-6 group cursor-pointer">
+             {/* Official PlayStation Logo SVG */}
+             <img className="w-16 h-16 fill-white transition-transform rounded-full duration-500 group-hover:scale-105" src="public/image/footer-logo-1.webp" alt="PlayStation Logo" />
+             <span className="text-3xl font-light tracking-wide pt-1">PlayStation</span>
+          </div>
+
+          <div className="text-xs md:text-sm text-[#8faecf] flex flex-wrap gap-2 items-center font-medium">
+            <a href="#" className="hover:text-white transition-colors duration-200">Home</a>
+            <span className="opacity-50">»</span>
+            <a href="#" className="hover:text-white transition-colors duration-200">Games</a>
+            <span className="opacity-50">»</span>
+            <span className="text-white opacity-90">Marvel's Spider-Man Remastered - PS5 Games | PlayStation</span>
+          </div>
+        </div>
+
+        {/* --- MAIN GRID LINKS --- */}
+        {/* Responsive: 2 cols on mobile -> 3 on tablet -> 6 on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12 mb-16 border-b border-white/20 pb-16">
+          
+          <FooterColumn 
+            addToRefs={addToRefs}
+            title="About" 
+            links={["About SIE", "Careers", "PlayStation Studios", "PlayStation Productions", "Corporate", "History of PlayStation"]} 
+          />
+
+          <FooterColumn 
+            addToRefs={addToRefs}
+            title="Products" 
+            links={["PS5", "PS4", "PS VR2", "PS Plus", "Accessories", "Games"]} 
+          />
+
+          <FooterColumn 
+            addToRefs={addToRefs}
+            title="Values" 
+            links={["Environment", "Accessibility", "Online safety", "Diversity, equity & inclusion"]} 
+          />
+
+          <FooterColumn 
+            addToRefs={addToRefs}
+            title="Support" 
+            links={["Support hub", "PlayStation Safety", "Status", "PlayStation Repairs", "Password reset"]} 
+          />
+
+          <FooterColumn 
+            addToRefs={addToRefs}
+            title="Resources" 
+            links={["Terms of service", "PS Store cancellation policy", "Age ratings", "Health warning", "Developers", "Glossary", "Official licensing programme"]} 
+          />
+
+          {/* Socials Column */}
+          <div ref={addToRefs} className="space-y-6">
+            <h3 className="font-bold text-lg tracking-wide">Connect</h3>
+            <div className="flex gap-5">
+              <SocialIcon Icon={Facebook} />
+              <SocialIcon Icon={Twitter} />
+              <SocialIcon Icon={Instagram} />
+              <SocialIcon Icon={Youtube} />
+            </div>
+            <ul className="space-y-3 text-sm text-[#dcebf9] font-medium">
+              <li><FooterLink text="iOS app" /></li>
+              <li><FooterLink text="Android APP" /></li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* --- BOTTOM: LEGAL --- */}
+        <div ref={bottomRef} className="flex flex-col md:flex-row items-start gap-8">
+          
+          {/* SIE LOGO Area */}
+          <div className="flex-shrink-0 group">
+             <Globe className="w-12 h-12 text-[#f5d51e] mb-2 md:hidden" /> {/* Fallback/Mobile Icon */}
+             
+             {/* This creates the yellow diamond logo with CSS to ensure it always works */}
+             <div className="w-14 h-14 bg-gradient-to-br from-[#f5d51e] to-[#e6a324] rotate-45 transform origin-center translate-y-2 translate-x-2 shadow-lg group-hover:rotate-180 transition-transform duration-700 ease-in-out"></div>
+          </div>
+
+          <div className="space-y-3 max-w-5xl">
+            <h4 className="text-xl font-light tracking-wide">Sony Interactive Entertainment</h4>
+            <p className="text-[11px] md:text-xs text-[#dcebf9] leading-relaxed opacity-80">
+              © 2026 Sony Interactive Entertainment Europe Limited (SIEE)<br />
+              All content, games titles, trade names and/or trade dress, trademarks, artwork and associated imagery are trademarks and/or copyright material of their respective owners. All rights reserved. 
+              <a href="#" className="underline ml-1 hover:text-white transition-colors">More info</a>
+            </p>
+          </div>
+          
+        </div>
+
+      </div>
+    </footer>
+  );
+};
+
+// --- HELPER COMPONENTS (For cleaner code & consistent animations) ---
+
+const FooterColumn = ({ title, links, addToRefs }) => (
+  <div ref={addToRefs} className="space-y-5">
+    <h3 className="font-bold text-lg tracking-wide">{title}</h3>
+    <ul className="space-y-3 text-sm text-[#dcebf9] font-medium">
+      {links.map((link, i) => (
+        <li key={i}>
+          <FooterLink text={link} />
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const FooterLink = ({ text }) => (
+  <a 
+    href="#" 
+    className="block hover:text-white hover:translate-x-1 transition-all duration-300 ease-out"
+  >
+    {text}
+  </a>
+);
+
+const SocialIcon = ({ Icon }) => (
+  <a 
+    href="#" 
+    className="bg-transparent p-1 rounded-full hover:bg-white/10 hover:scale-110 transition-all duration-300"
+  >
+    <Icon size={24} strokeWidth={1.5} />
+  </a>
+);
+
+export default Footer;

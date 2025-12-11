@@ -15,6 +15,7 @@ import GameFranchise from './GameFranchise';
 import DiscoverMoreGames from './DiscoverMoreGames'
 import AccessablityFeatures from './AccessablityFeatures'
 import GameDetails from './GameDetails';
+import Footer from './Footer';
 
 
 // --- Icons ---
@@ -374,6 +375,7 @@ const SpiderManPage = () => {
       <DiscoverMoreGames />
       <AccessablityFeatures/>
       <GameDetails/>
+      <Footer/>
     </div>
   );
 };

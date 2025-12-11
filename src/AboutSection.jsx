@@ -14,9 +14,10 @@ const placeholderImages = {
         { type: 'image', src: 'public/image/spider-1.webp' },
         { type: 'image', src: 'public/image/slide-2.webp' },
         // Added a thumbnail to the video object for better loading
-        { type: 'video', src: 'https://youtu.be/Tsf5Wjb1uAM', thumbnail: 'https://img.youtube.com/vi/Tsf5Wjb1uAM/maxresdefault.jpg' },
+        { type: 'video', src: 'public/video/video-1.mp4', thumbnail: 'https://img.youtube.com/vi/Tsf5Wjb1uAM/maxresdefault.jpg' },
         { type: 'image', src: 'public/image/slide-3.webp' },
         { type: 'image', src: 'public/image/slide-4.webp' },
+        { type: 'image', src: 'public/image/slide-5.webp' },
     ]
 };
 
