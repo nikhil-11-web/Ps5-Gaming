@@ -17,7 +17,7 @@ const Logo = () => (
         {/* 4. The Image */}
         <img 
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" 
-          src="/image/bg-main.png"  // Fixed path for React public folder
+          src="image/bg-main.png"  
           alt="Brand Logo" 
         />
         
@@ -82,29 +82,29 @@ const Navbar = () => {
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-5">
             
-            {/* Sign In Button (Premium Glass Style) */}
+        
             <button className="hidden sm:flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold py-2 px-5 rounded-full text-xs uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(0,112,209,0.3)] group">
               <User className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors" />
               Sign In
             </button>
 
-            {/* Mobile Menu Button */}
+           
             <button 
               className="lg:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors relative group"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              {/* Button Glow */}
+           
               <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
           </div>
         </div>
 
-        {/* --- SCROLL PROGRESS LINE (Lighting Effect) --- */}
+      
         <div className={`absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent transition-all duration-1000 ${isScrolled ? 'w-full opacity-50' : 'w-0 opacity-0'}`}></div>
       </nav>
 
-      {/* --- MOBILE MENU (Dark Glass Drawer) --- */}
+  
       <div 
         className={`fixed inset-0 z-40 bg-[#020202]/95 backdrop-blur-3xl transition-all duration-500 ease-[cubic-bezier(0.32,0,0.67,0)] lg:hidden flex flex-col pt-32 px-8
         ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}

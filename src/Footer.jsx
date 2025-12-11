@@ -1,7 +1,8 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import PropTypes from 'prop-types';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Facebook, Twitter, Instagram, Youtube, Globe, Heart } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Globe, Heart, } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -201,5 +202,7 @@ const SocialIcon = ({ Icon }) => (
     <Icon size={20} strokeWidth={1.5} />
   </a>
 );
-
+SocialIcon.propTypes = {
+  Icon: PropTypes.elementType.isRequired,
+};
 export default Footer;
